@@ -20,8 +20,8 @@ export default function Read() {
         body: new URLSearchParams({
           grant_type: "authorization_code",
           code: code,
-          redirect_uri: process.env.REDIRECT_URI ?? "",
-          client_id: process.env.CLIENT_ID ?? "",
+          redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI ?? "",
+          client_id: process.env.NEXT_PUBLIC_CLIENT_ID ?? "",
           code_verifier: codeVerifier ?? "",
         }),
       };

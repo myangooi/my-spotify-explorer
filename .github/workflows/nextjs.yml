@@ -91,6 +91,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         env:
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          NEXT_PUBLIC_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          NEXT_PUBLIC_REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
         uses: actions/deploy-pages@v4

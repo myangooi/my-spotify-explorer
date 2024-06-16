@@ -42,11 +42,11 @@ async function redirectToSpotifyAuthorize() {
   const authUrl = new URL(CONST.AUTHORIZATION_URL ?? "");
   const params = {
     response_type: "code",
-    client_id: process.env.CLIENT_ID ?? "",
+    client_id: process.env.NEXT_PUBLIC_CLIENT_ID ?? "",
     scope: CONST.SCOPE ?? "",
     code_challenge_method: "S256",
     code_challenge: code_challenge_base64,
-    redirect_uri: process.env.REDIRECT_URI ?? "",
+    redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI ?? "",
   };
 
   authUrl.search = new URLSearchParams(params).toString();

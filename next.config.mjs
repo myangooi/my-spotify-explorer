@@ -6,8 +6,8 @@ const nextConfig = {
   assetPrefix: isProd ? "/my-spotify-explorer" : "",
   basePath: isProd ? "/my-spotify-explorer" : "",
   env: {
-    CLIENT_ID: process.env.CLIENT_ID,
-    REDIRECT_URI: process.env.REDIRECT_URI,
+    NEXT_PUBLIC_CLIENT_ID: process.env.NEXT_PUBLIC_CLIENT_ID,
+    NEXT_PUBLIC_REDIRECT_URI: process.env.NEXT_PUBLIC_REDIRECT_URI,
   },
 };
 
