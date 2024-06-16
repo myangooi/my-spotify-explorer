@@ -6,7 +6,7 @@ export default function TopTracks({
   timeRange,
 }: {
   topTracks: TopTracksResponse | null;
-  timeRange: TimeRange;
+  timeRange: TimeRange | null;
 }) {
   const displayText =
     timeRange === "short_term"
@@ -18,7 +18,7 @@ export default function TopTracks({
   return (
     <>
       <div className="text-2xl font-bold px-4 py-2">
-        Top Track ({displayText})
+        {displayText ? `Top Track (${displayText})` : "Select a time range"}
       </div>
       <div className="flex flex-wrap justify-center">
         {topTracks &&

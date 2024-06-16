@@ -9,7 +9,7 @@ import TopTracks from "../components/TopItems/Tracks/TopTracks";
 export default function Profile() {
   const [topTracks, setTopTracks] = useState<TopTracksResponse | null>(null);
   const [mode, setMode] = useState<"tracks" | "artists">();
-  const [timeRange, setTimeRange] = useState<TimeRange>("short_term");
+  const [timeRange, setTimeRange] = useState<TimeRange | null>(null);
 
   function handleFetch(data: TopTracksResponse) {
     setTopTracks(data);
