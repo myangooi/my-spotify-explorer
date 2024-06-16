@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import CONST from "../constants";
 
+// Get access token and redirect to profile page
 export default function Read() {
   const urlParams = new URLSearchParams(window.location.search);
   let code = urlParams.get("code") ?? "";
