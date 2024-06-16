@@ -77,7 +77,10 @@ jobs:
         env:
           NEXT_PUBLIC_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           NEXT_PUBLIC_REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: |
+          echo "NEXT_PUBLIC_CLIENT_ID=${NEXT_PUBLIC_CLIENT_ID}"
+          echo "NEXT_PUBLIC_REDIRECT_URI=${NEXT_PUBLIC_REDIRECT_URI}"
+          ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -93,7 +96,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        env:
-          NEXT_PUBLIC_CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          NEXT_PUBLIC_REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
         uses: actions/deploy-pages@v4
