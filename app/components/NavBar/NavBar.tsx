@@ -1,8 +1,10 @@
+import LogoutButton from "../Button/LogoutButton";
+
 export default function NavBar() {
   return (
-    <div className="navbar bg-primary">
-      <div className="flex-1">Title</div>
-      <div className="flex-1">
+    <div className="navbar bg-primary flex justify-around">
+      <div className="font-bold">Test Site</div>
+      <div className="">
         <ul className="menu menu-horizontal px-1">
           <li>
             <details className="w-60">
@@ -22,7 +24,9 @@ export default function NavBar() {
           </li>
         </ul>
       </div>
-      <div className="flex-none">Logout</div>
+      <div className="">
+        <LogoutButton />
+      </div>
     </div>
   );
 }
