@@ -34,7 +34,7 @@ export default function Read() {
         const response = await body.json();
         window.localStorage.setItem("access_token", response.access_token);
         window.localStorage.setItem("refresh_token", response.refresh_token);
-        window.location.href = "/profile";
+        window.location.href = `${CONST.BASE_URL}/profile`;
       } catch (error) {
         console.error("Failed to get access token", error);
       }
