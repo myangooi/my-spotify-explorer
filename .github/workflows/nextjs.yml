@@ -92,4 +92,5 @@ jobs:
         id: deployment
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
         uses: actions/deploy-pages@v4

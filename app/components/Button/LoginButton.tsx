@@ -46,7 +46,7 @@ async function redirectToSpotifyAuthorize() {
     scope: CONST.SCOPE ?? "",
     code_challenge_method: "S256",
     code_challenge: code_challenge_base64,
-    redirect_uri: CONST.REDIRECT_URL ?? "",
+    redirect_uri: process.env.REDIRECT_URI ?? "",
   };
 
   authUrl.search = new URLSearchParams(params).toString();
