@@ -13,7 +13,9 @@ export default function TopTracks({
       ? "Last month"
       : timeRange === "medium_term"
       ? "Last 6 months"
-      : "Last year";
+      : timeRange === "long_term"
+      ? "Last year"
+      : null;
 
   return (
     <>
