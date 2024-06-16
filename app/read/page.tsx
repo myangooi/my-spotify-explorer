@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import CONST from "../constants";
 
 export default function Read() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -17,13 +18,13 @@ export default function Read() {
       body: new URLSearchParams({
         grant_type: "authorization_code",
         code: code,
-        redirect_uri: process.env.REDIRECT_URL ?? "",
+        redirect_uri: CONST.REDIRECT_URL ?? "",
         client_id: process.env.CLIENT_ID ?? "",
         code_verifier: codeVerifier ?? "",
       }),
     };
 
-    const body = await fetch("https://accounts.spotify.com/api/token", payload);
+    const body = await fetch(CONST.TOKEN_URL, payload);
     const response = await body.json();
     window.localStorage.setItem("access_token", response.access_token);
   }

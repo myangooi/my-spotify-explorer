@@ -1,5 +1,6 @@
 "use client";
 
+import CONST from "@/app/constants";
 import React from "react";
 
 export default function LoginButton() {
@@ -37,14 +38,14 @@ async function redirectToSpotifyAuthorize() {
   window.localStorage.setItem("code_verifier", code_verifier);
   document.cookie = `verifier=${code_verifier}`;
 
-  const authUrl = new URL(process.env.AUTHORIZATION_URL ?? "");
+  const authUrl = new URL(CONST.AUTHORIZATION_URL ?? "");
   const params = {
     response_type: "code",
     client_id: process.env.CLIENT_ID ?? "",
-    scope: process.env.SCOPE ?? "",
+    scope: CONST.SCOPE ?? "",
     code_challenge_method: "S256",
     code_challenge: code_challenge_base64,
-    redirect_uri: process.env.REDIRECT_URL ?? "",
+    redirect_uri: CONST.REDIRECT_URL ?? "",
   };
 
   authUrl.search = new URLSearchParams(params).toString();
