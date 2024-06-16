@@ -15,6 +15,7 @@ export default function LoginButton() {
   );
 }
 
+// Redirect to Spotify authorize page
 async function redirectToSpotifyAuthorize() {
   const possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
