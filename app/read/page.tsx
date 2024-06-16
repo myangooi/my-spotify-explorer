@@ -26,14 +26,21 @@ export default function Read() {
         }),
       };
 
-      const body = await fetch(CONST.TOKEN_URL, payload);
-      const response = await body.json();
-      window.localStorage.setItem("access_token", response.access_token);
+      try {
+        const body = await fetch(CONST.TOKEN_URL, payload);
+        if (!body.ok) {
+          throw new Error("Request failed");
+        }
+        const response = await body.json();
+        window.localStorage.setItem("access_token", response.access_token);
+        window.localStorage.setItem("refresh_token", response.refresh_token);
+        window.location.href = "/profile";
+      } catch (error) {
+        console.error("Failed to get access token", error);
+      }
     }
 
-    getAccessToken().then(() => {
-      window.location.href = "/profile";
-    });
+    getAccessToken();
   }, []);
 
   return <></>;
