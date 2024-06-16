@@ -18,10 +18,12 @@ export default function TopTracks({
   return (
     <>
       <div className="text-2xl font-bold px-4 py-2">
-        {displayText ? `Top Track (${displayText})` : "Select a time range"}
+        {displayText !== null
+          ? `Top Track (${displayText})`
+          : "Select a time range"}
       </div>
       <div className="flex flex-wrap justify-center">
-        {topTracks &&
+        {topTracks !== null &&
           topTracks.items.map((track, index) => (
             <div key={index} className="card w-5/12 bg-blue-300 m-1">
               <div className="card-body">
