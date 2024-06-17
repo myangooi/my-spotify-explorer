@@ -1,28 +1,37 @@
 "use client";
 
 import CONST from "@/app/constants";
-import { TopTracksResponse } from "@/app/interfaces/api-top";
+import {
+  TopArtistsResponse,
+  TopTracksResponse,
+} from "@/app/interfaces/api-top";
 
 export type TimeRange = "short_term" | "medium_term" | "long_term";
+export type Type = "artists" | "tracks";
 
-export default function GetTopTracks({
+export default function GetTopItems({
   timeRange,
+  type,
   handleFetch,
   handleTimeRange,
 }: {
   timeRange: TimeRange;
-  handleFetch: (data: TopTracksResponse) => void;
+  type: Type | "";
+  handleFetch: (data: TopTracksResponse | TopArtistsResponse) => void;
   handleTimeRange: (timeRange: TimeRange) => void;
 }) {
-  async function getTopTracks() {
+  async function getTopItems() {
     const accessToken = window.localStorage.getItem("access_token");
     try {
       if (!accessToken) {
         window.location.href = `${CONST.BASE_URL}`;
         throw new Error("Access token not found");
       }
+      if (type === "") {
+        throw new Error("No type selected");
+      }
       const response = await fetch(
-        `https://api.spotify.com/v1/me/top/tracks/?time_range=${timeRange}`,
+        `https://api.spotify.com/v1/me/top/${type}/?time_range=${timeRange}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -32,7 +41,12 @@ export default function GetTopTracks({
         window.location.href = `${CONST.BASE_URL}`;
         throw new Error("Request failed");
       }
-      const data: TopTracksResponse = await response.json();
+      let data: TopArtistsResponse | TopTracksResponse;
+      if (type === "artists") {
+        data = (await response.json()) as TopArtistsResponse;
+      } else {
+        data = (await response.json()) as TopTracksResponse;
+      }
       handleFetch(data);
       handleTimeRange(timeRange);
     } catch (error) {
@@ -49,7 +63,11 @@ export default function GetTopTracks({
       : "Last year";
 
   return (
-    <button className="btn btn-info btn-sm" onClick={getTopTracks}>
+    <button
+      className="btn btn-info btn-sm"
+      onClick={getTopItems}
+      disabled={type === ""}
+    >
       {displayText}
     </button>
   );

@@ -1,5 +1,3 @@
-import { TopTracksResponse } from "@/app/interfaces/api-top";
-import GetTopTracks, { TimeRange } from "../Button/GetTopTracks";
 import LogoutButton from "../Button/LogoutButton";
 
 export default function NavBar() {

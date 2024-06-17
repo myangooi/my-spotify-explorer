@@ -2,17 +2,31 @@
 
 import { useState } from "react";
 import NavBar from "../components/NavBar/NavBar";
-import { TopTracksResponse } from "../interfaces/api-top";
-import GetTopTracks, { TimeRange } from "../components/Button/GetTopTracks";
+import { TopArtistsResponse, TopTracksResponse } from "../interfaces/api-top";
 import TopTracks from "../components/TopItems/Tracks/TopTracks";
+import GetTopItems, { TimeRange, Type } from "../components/Button/GetTopItems";
+import TopTypeSelect from "../components/Select/TopTypeSelect";
+import TopArtists from "../components/TopItems/Artists/TopArtists";
 
 export default function Profile() {
-  const [topTracks, setTopTracks] = useState<TopTracksResponse | null>(null);
-  const [mode, setMode] = useState<"tracks" | "artists">();
+  const [topItems, setItems] = useState<
+    TopTracksResponse | TopArtistsResponse | null
+  >(null);
+  const [mode, setMode] = useState<Type | "">("");
   const [timeRange, setTimeRange] = useState<TimeRange | null>(null);
 
-  function handleFetch(data: TopTracksResponse) {
-    setTopTracks(data);
+  function handleFetch(data: TopTracksResponse | TopArtistsResponse) {
+    setItems(data);
+  }
+
+  function handleMode(event: React.ChangeEvent<HTMLSelectElement>) {
+    if (event.target.value === "artists" || event.target.value === "tracks") {
+      setMode(event.target.value);
+      setItems(null);
+      setTimeRange(null);
+    } else {
+      setMode("");
+    }
   }
 
   function handleTimeRange(timeRange: TimeRange) {
@@ -23,24 +37,42 @@ export default function Profile() {
     <>
       <NavBar />
       <div className="relative top-16">
-        <div className="flex justify-center py-3 gap-3">
-          <GetTopTracks
-            timeRange="short_term"
-            handleFetch={handleFetch}
-            handleTimeRange={handleTimeRange}
-          />
-          <GetTopTracks
-            timeRange="medium_term"
-            handleFetch={handleFetch}
-            handleTimeRange={handleTimeRange}
-          />
-          <GetTopTracks
-            timeRange="long_term"
-            handleFetch={handleFetch}
-            handleTimeRange={handleTimeRange}
-          />
+        <div className="flex flex-row gap-4 flex-wrap justify-center py-3">
+          <TopTypeSelect handleMode={handleMode} />
+          <div className="flex flex-row justify-center gap-2">
+            <GetTopItems
+              timeRange="short_term"
+              type={mode}
+              handleFetch={handleFetch}
+              handleTimeRange={handleTimeRange}
+            />
+            <GetTopItems
+              timeRange="medium_term"
+              type={mode}
+              handleFetch={handleFetch}
+              handleTimeRange={handleTimeRange}
+            />
+            <GetTopItems
+              timeRange="long_term"
+              type={mode}
+              handleFetch={handleFetch}
+              handleTimeRange={handleTimeRange}
+            />
+          </div>
         </div>
-        <TopTracks topTracks={topTracks} timeRange={timeRange} />
+        {mode === "tracks" ? (
+          <TopTracks
+            topTracks={topItems as TopTracksResponse}
+            timeRange={timeRange}
+          />
+        ) : mode === "artists" ? (
+          <TopArtists
+            topArtists={topItems as TopArtistsResponse}
+            timeRange={timeRange}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
