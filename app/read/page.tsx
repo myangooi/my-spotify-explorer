@@ -37,6 +37,7 @@ export default function Read() {
         window.location.href = `${CONST.BASE_URL}/profile`;
       } catch (error) {
         console.error("Failed to get access token", error);
+        window.location.href = `${CONST.BASE_URL}/`;
       }
     }
 
