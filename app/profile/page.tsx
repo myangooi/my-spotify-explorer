@@ -22,24 +22,26 @@ export default function Profile() {
   return (
     <>
       <NavBar />
-      <div className="flex justify-center py-3 gap-3">
-        <GetTopTracks
-          timeRange="short_term"
-          handleFetch={handleFetch}
-          handleTimeRange={handleTimeRange}
-        />
-        <GetTopTracks
-          timeRange="medium_term"
-          handleFetch={handleFetch}
-          handleTimeRange={handleTimeRange}
-        />
-        <GetTopTracks
-          timeRange="long_term"
-          handleFetch={handleFetch}
-          handleTimeRange={handleTimeRange}
-        />
+      <div className="relative top-16">
+        <div className="flex justify-center py-3 gap-3">
+          <GetTopTracks
+            timeRange="short_term"
+            handleFetch={handleFetch}
+            handleTimeRange={handleTimeRange}
+          />
+          <GetTopTracks
+            timeRange="medium_term"
+            handleFetch={handleFetch}
+            handleTimeRange={handleTimeRange}
+          />
+          <GetTopTracks
+            timeRange="long_term"
+            handleFetch={handleFetch}
+            handleTimeRange={handleTimeRange}
+          />
+        </div>
+        <TopTracks topTracks={topTracks} timeRange={timeRange} />
       </div>
-      <TopTracks topTracks={topTracks} timeRange={timeRange} />
     </>
   );
 }

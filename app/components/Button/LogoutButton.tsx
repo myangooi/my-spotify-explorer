@@ -10,7 +10,7 @@ export default function LogoutButton() {
   }
 
   return (
-    <button className="btn btn-active btn-ghost" onClick={logout}>
+    <button className="btn btn-active btn-ghost btn-md" onClick={logout}>
       Logout
     </button>
   );
