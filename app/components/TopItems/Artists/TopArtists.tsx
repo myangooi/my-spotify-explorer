@@ -53,16 +53,12 @@ export default function TopArtists({
                 <Image
                   src={artist.images[artist.images.length - 1].url}
                   alt={artist.name}
-                  width={160}
-                  height={160}
-                  className="min-w-40"
+                  width={64}
+                  height={64}
+                  className="min-w-16"
                 />
               )}
               <div className="flex flex-col gap-1">
-                <div>
-                  <span className="font-medium">Genres</span>:{" "}
-                  {artist.genres.join(", ")}
-                </div>
                 <div>
                   <span className="font-medium">Followers</span>:{" "}
                   {artist.followers.total}
