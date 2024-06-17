@@ -36,7 +36,6 @@ export default function Read() {
         window.localStorage.setItem("refresh_token", response.refresh_token);
         window.location.href = `${CONST.BASE_URL}/profile`;
       } catch (error) {
-        console.error("Failed to get access token", error);
         window.location.href = `${CONST.BASE_URL}/`;
       }
     }
