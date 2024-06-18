@@ -11,12 +11,14 @@ import { timeRangeDisplayString } from "@/app/shared/utils/displayString";
 export default function GetTopItems({
   timeRange,
   type,
-  handleFetch,
+  handleFetchArtists,
+  handleFetchTracks,
   handleTimeRange,
 }: {
   timeRange: TimeRange;
   type: Type | "";
-  handleFetch: (data: TopTracksResponse | TopArtistsResponse) => void;
+  handleFetchArtists: (data: TopArtistsResponse) => void;
+  handleFetchTracks: (data: TopTracksResponse) => void;
   handleTimeRange: (timeRange: TimeRange) => void;
 }) {
   const displayText = timeRangeDisplayString(timeRange);
@@ -42,14 +44,14 @@ export default function GetTopItems({
         window.location.href = `${CONST.BASE_URL}`;
         throw new Error("Request failed");
       }
-      let data: TopArtistsResponse | TopTracksResponse;
-      if (type === "artists") {
-        data = (await response.json()) as TopArtistsResponse;
-      } else {
-        data = (await response.json()) as TopTracksResponse;
-      }
-      handleFetch(data);
       handleTimeRange(timeRange);
+      if (type === "artists") {
+        const data: TopArtistsResponse = await response.json();
+        handleFetchArtists(data);
+      } else {
+        const data: TopTracksResponse = await response.json();
+        handleFetchTracks(data);
+      }
     } catch (error) {
       console.error("Failed to get top tracks", error);
       window.location.href = `${CONST.BASE_URL}`;

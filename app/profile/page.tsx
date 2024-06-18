@@ -6,23 +6,30 @@ import {
   TopArtistsResponse,
   TopTracksResponse,
 } from "../shared/interfaces/getTopItem";
-import TopTracks from "../components/TopItems/TopTracks";
 import GetTopItems from "../components/Button/GetTopItems";
 import TopTypeSelect from "../components/Select/TopTypeSelect";
-import TopArtists from "../components/TopItems/TopArtists";
 import CONST from "../shared/constants";
-import { TimeRange, Type } from "../shared/interfaces/types";
+import { TimeRange, timeRangeKeys, Type } from "../shared/interfaces/types";
+import TopItems from "../components/TopItems/TopItems";
 
 export default function Profile() {
   const [isLogin, setIsLogin] = useState(false);
   const [topItems, setItems] = useState<
     TopTracksResponse | TopArtistsResponse | null
   >(null);
+  const [topTracks, setTopTracks] = useState<TopTracksResponse | null>(null);
+  const [topArtists, setTopArtists] = useState<TopArtistsResponse | null>(null);
   const [mode, setMode] = useState<Type | "">("");
   const [timeRange, setTimeRange] = useState<TimeRange | null>(null);
 
-  function handleFetch(data: TopTracksResponse | TopArtistsResponse) {
-    setItems(data);
+  function handleFetchArtists(data: TopArtistsResponse) {
+    setTopArtists(data);
+    setTopTracks(null);
+  }
+
+  function handleFetchTracks(data: TopTracksResponse) {
+    setTopTracks(data);
+    setTopArtists(null);
   }
 
   function handleMode(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -56,39 +63,24 @@ export default function Profile() {
             <div className="flex flex-row gap-4 flex-wrap justify-center py-3">
               <TopTypeSelect handleMode={handleMode} />
               <div className="flex flex-row justify-center gap-2">
-                <GetTopItems
-                  timeRange="short_term"
-                  type={mode}
-                  handleFetch={handleFetch}
-                  handleTimeRange={handleTimeRange}
-                />
-                <GetTopItems
-                  timeRange="medium_term"
-                  type={mode}
-                  handleFetch={handleFetch}
-                  handleTimeRange={handleTimeRange}
-                />
-                <GetTopItems
-                  timeRange="long_term"
-                  type={mode}
-                  handleFetch={handleFetch}
-                  handleTimeRange={handleTimeRange}
-                />
+                {timeRangeKeys.map((timeRange: TimeRange, index) => (
+                  <GetTopItems
+                    timeRange={timeRange}
+                    type={mode}
+                    handleFetchArtists={handleFetchArtists}
+                    handleFetchTracks={handleFetchTracks}
+                    handleTimeRange={handleTimeRange}
+                    key={index}
+                  />
+                ))}
               </div>
             </div>
-            {mode === "tracks" ? (
-              <TopTracks
-                topTracks={topItems as TopTracksResponse}
-                timeRange={timeRange}
-              />
-            ) : mode === "artists" ? (
-              <TopArtists
-                topArtists={topItems as TopArtistsResponse}
-                timeRange={timeRange}
-              />
-            ) : (
-              <></>
-            )}
+            <TopItems
+              topArtists={topArtists}
+              topTracks={topTracks}
+              timeRange={timeRange}
+              mode={mode}
+            />
           </div>
         </>
       ) : null}
