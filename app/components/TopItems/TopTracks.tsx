@@ -2,6 +2,7 @@ import { TopTracksResponse } from "@/app/shared/interfaces/getTopItem";
 import { TimeRange } from "@/app/shared/interfaces/types";
 import { useEffect } from "react";
 import Image from "next/image";
+import { timeRangeDisplayString } from "@/app/shared/utils/displayString";
 
 export default function TopTracks({
   topTracks,
@@ -10,14 +11,7 @@ export default function TopTracks({
   topTracks: TopTracksResponse | null;
   timeRange: TimeRange | null;
 }) {
-  const displayText =
-    timeRange === "short_term"
-      ? "Last month"
-      : timeRange === "medium_term"
-      ? "Last 6 months"
-      : timeRange === "long_term"
-      ? "Last year"
-      : null;
+  const displayText = timeRangeDisplayString(timeRange);
 
   useEffect(() => {
     for (let i = 0; i < document.getElementsByTagName("input").length; i++) {
