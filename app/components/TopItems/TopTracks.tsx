@@ -1,13 +1,13 @@
-import { TopArtistsResponse } from "@/app/interfaces/api-top";
-import { TimeRange } from "../../Button/GetTopItems";
+import { TopTracksResponse } from "@/app/shared/interfaces/getTopItem";
+import { TimeRange } from "../Button/GetTopItems";
 import { useEffect } from "react";
 import Image from "next/image";
 
-export default function TopArtists({
-  topArtists,
+export default function TopTracks({
+  topTracks,
   timeRange,
 }: {
-  topArtists: TopArtistsResponse | null;
+  topTracks: TopTracksResponse | null;
   timeRange: TimeRange | null;
 }) {
   const displayText =
@@ -26,15 +26,15 @@ export default function TopArtists({
         checkbox.checked = false;
       }
     }
-  }, [topArtists, timeRange]);
+  }, [topTracks, timeRange]);
 
   return (
     <>
       <div className="text-2xl font-bold px-4 py-2">
-        {displayText !== null ? `Top 20 Artists (${displayText})` : ""}
+        {displayText !== null ? `Top 20 Tracks (${displayText})` : ""}
       </div>
       <div className="flex flex-wrap justify-center gap-2 px-6">
-        {topArtists?.items.map((artist, index) => (
+        {topTracks?.items.map((track, index) => (
           <div
             key={index}
             className="collapse collapse-arrow max-w-4xl min-w-80 bg-indigo-300 shadow-md rounded-lg"
@@ -44,28 +44,36 @@ export default function TopArtists({
               <span className="text-xl font-semibold min-w-8 text-right">
                 {index + 1}.
               </span>
-              <span className="text-xl font-semibold min-w-0">
-                {artist.name}
-              </span>
+              <div className="flex flex-row gap-2 items-baseline flex-wrap">
+                <span className="text-xl font-semibold min-w-0">
+                  {track.name}
+                </span>
+                <span className="text-md">
+                  {track.artists.map((value) => value.name).join(", ")}
+                </span>
+              </div>
             </div>
             <div className="collapse-content flex flex-row px-16 gap-4 items-center">
-              {artist.images.length !== 0 && (
+              {track.album.images.length !== 0 && (
                 <Image
-                  src={artist.images[artist.images.length - 1].url}
-                  alt={artist.name}
-                  width={64}
-                  height={64}
-                  className="min-w-16"
+                  src={track.album.images[track.album.images.length - 1].url}
+                  alt={track.album.name}
+                  width={
+                    track.album.images[track.album.images.length - 1].width
+                  }
+                  height={
+                    track.album.images[track.album.images.length - 1].height
+                  }
+                  className="min-w-16 min-h-16"
                 />
               )}
               <div className="flex flex-col gap-1">
                 <div>
-                  <span className="font-medium">Followers</span>:{" "}
-                  {artist.followers.total}
+                  <span className="font-medium">Album</span>: {track.album.name}
                 </div>
                 <div>
                   <span className="font-medium">Popularity</span>:{" "}
-                  {artist.popularity}
+                  {track.popularity}
                 </div>
               </div>
             </div>

@@ -1,11 +1,11 @@
 "use client";
 
-import CONST from "@/app/constants";
+import CONST from "@/app/shared/constants";
 import {
   TopArtistsResponse,
   TopTracksResponse,
-} from "@/app/interfaces/api-top";
-
+} from "@/app/shared/interfaces/getTopItem";
+import { timeRangeDisplayString } from "@/app/shared/utils/displayString";
 export type TimeRange = "short_term" | "medium_term" | "long_term";
 export type Type = "artists" | "tracks";
 
@@ -20,6 +20,8 @@ export default function GetTopItems({
   handleFetch: (data: TopTracksResponse | TopArtistsResponse) => void;
   handleTimeRange: (timeRange: TimeRange) => void;
 }) {
+  const displayText = timeRangeDisplayString(timeRange);
+
   async function getTopItems() {
     const accessToken = window.localStorage.getItem("access_token");
     try {
@@ -54,13 +56,6 @@ export default function GetTopItems({
       window.location.href = `${CONST.BASE_URL}`;
     }
   }
-
-  const displayText =
-    timeRange === "short_term"
-      ? "Last month"
-      : timeRange === "medium_term"
-      ? "Last 6 months"
-      : "Last year";
 
   return (
     <button

@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar/NavBar";
-import { TopArtistsResponse, TopTracksResponse } from "../interfaces/api-top";
-import TopTracks from "../components/TopItems/Tracks/TopTracks";
+import {
+  TopArtistsResponse,
+  TopTracksResponse,
+} from "../shared/interfaces/getTopItem";
+import TopTracks from "../components/TopItems/TopTracks";
 import GetTopItems, { TimeRange, Type } from "../components/Button/GetTopItems";
 import TopTypeSelect from "../components/Select/TopTypeSelect";
-import TopArtists from "../components/TopItems/Artists/TopArtists";
-import CONST from "../constants";
+import TopArtists from "../components/TopItems/TopArtists";
+import CONST from "../shared/constants";
 
 export default function Profile() {
   const [isLogin, setIsLogin] = useState(false);

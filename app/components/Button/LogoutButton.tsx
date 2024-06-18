@@ -1,6 +1,6 @@
 "use client";
 
-import CONST from "@/app/constants";
+import CONST from "@/app/shared/constants";
 import React from "react";
 
 export default function LogoutButton() {
