@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "My Spotify Explorer",
   description: "Spotify Stuff at a Glance",
   icons: "/favicon.ico",
-  metadataBase: new URL(CONST.BASE_URL),
+  metadataBase: new URL("https://myangooi.github.io/my-spotify-explorer/"),
 };
 
 export default function RootLayout({
