@@ -34,7 +34,7 @@ export default function GetTopItems({
         throw new Error("No type selected");
       }
       const response = await fetch(
-        `https://api.spotify.com/v1/me/top/${type}/?time_range=${timeRange}`,
+        `${CONST.API_ROOT_URL}/me/top/${type}/?time_range=${timeRange}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${accessToken}` },
