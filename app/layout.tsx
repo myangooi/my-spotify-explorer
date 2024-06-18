@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import CONST from "./shared/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "My Spotify Explorer",
   description: "Spotify Stuff at a Glance",
-  icons: "/favicon.ico",
+  icons: "./favicon.ico",
 };
 
 export default function RootLayout({

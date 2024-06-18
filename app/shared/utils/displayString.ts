@@ -1,4 +1,4 @@
-import { TimeRange } from "@/app/components/Button/GetTopItems";
+import { TimeRange } from "../interfaces/types";
 
 export function timeRangeDisplayString(
   timeRange: TimeRange | null

@@ -7,10 +7,11 @@ import {
   TopTracksResponse,
 } from "../shared/interfaces/getTopItem";
 import TopTracks from "../components/TopItems/TopTracks";
-import GetTopItems, { TimeRange, Type } from "../components/Button/GetTopItems";
+import GetTopItems from "../components/Button/GetTopItems";
 import TopTypeSelect from "../components/Select/TopTypeSelect";
 import TopArtists from "../components/TopItems/TopArtists";
 import CONST from "../shared/constants";
+import { TimeRange, Type } from "../shared/interfaces/types";
 
 export default function Profile() {
   const [isLogin, setIsLogin] = useState(false);

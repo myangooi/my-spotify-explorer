@@ -1,5 +1,5 @@
 import { TopArtistsResponse } from "@/app/shared/interfaces/getTopItem";
-import { TimeRange } from "../Button/GetTopItems";
+import { TimeRange } from "@/app/shared/interfaces/types";
 import { useEffect } from "react";
 import Image from "next/image";
 import { timeRangeDisplayString } from "@/app/shared/utils/displayString";

@@ -5,9 +5,8 @@ import {
   TopArtistsResponse,
   TopTracksResponse,
 } from "@/app/shared/interfaces/getTopItem";
+import { TimeRange, Type } from "@/app/shared/interfaces/types";
 import { timeRangeDisplayString } from "@/app/shared/utils/displayString";
-export type TimeRange = "short_term" | "medium_term" | "long_term";
-export type Type = "artists" | "tracks";
 
 export default function GetTopItems({
   timeRange,
