@@ -8,16 +8,6 @@ export const metadata: Metadata = {
   title: "My Spotify Explorer",
   description: "Spotify Stuffs at a Glance",
   icons: "/favicon.ico",
-  openGraph: {
-    images: [
-      {
-        url: "/images.jpg",
-        width: 90,
-        height: 90,
-        alt: "Huh?",
-      },
-    ],
-  },
 };
 
 export default function RootLayout({
