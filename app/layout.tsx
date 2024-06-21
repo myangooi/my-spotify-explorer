@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "My Spotify Explorer",
+  title: "Spotify Explorer",
   description: "Spotify Stuff at a Glance",
   icons: "./favicon.ico",
   metadataBase: new URL("https://myangooi.github.io/"),
