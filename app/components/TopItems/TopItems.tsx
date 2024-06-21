@@ -12,23 +12,23 @@ export default function TopItems({
   topTracks,
   topArtists,
   timeRange,
-  mode,
+  type,
 }: {
   topTracks: TopTracksResponse | null;
   topArtists: TopArtistsResponse | null;
   timeRange: TimeRange | null;
-  mode: Type | "";
+  type: Type | "";
 }) {
   const displayText = timeRangeDisplayString(timeRange);
 
-  function renderItemBasedOnMode() {
-    return mode === "artists" ? (
+  function renderItemBasedOnType() {
+    return type === "artists" ? (
       <>
         {topArtists?.items.map((artist, index) => (
           <ArtistCollapse artist={artist} index={index} key={index} />
         ))}
       </>
-    ) : mode === "tracks" ? (
+    ) : type === "tracks" ? (
       <>
         {topTracks?.items.map((track, index) => (
           <TrackCollapse track={track} index={index} key={index} />
@@ -54,7 +54,7 @@ export default function TopItems({
         {displayText !== null ? `Top 20 Tracks (${displayText})` : ""}
       </div>
       <div className="flex flex-wrap justify-center gap-2 px-6">
-        {renderItemBasedOnMode()}
+        {renderItemBasedOnType()}
       </div>
     </>
   );

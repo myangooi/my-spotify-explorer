@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import CONST from "../shared/constants";
+import CONST from "../lib/constants";
 
 // Get access token and redirect to profile page
 export default function Redirect() {

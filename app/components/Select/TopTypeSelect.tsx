@@ -1,12 +1,12 @@
 export default function TopTypeSelect({
-  handleMode,
+  handleType,
 }: {
-  handleMode: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleType: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }) {
   return (
     <select
       defaultValue=""
-      onChange={handleMode}
+      onChange={handleType}
       className="select select-bordered select-sm w-1/2 max-w-24"
     >
       <option disabled value="">

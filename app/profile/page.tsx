@@ -5,21 +5,18 @@ import NavBar from "../components/NavBar/NavBar";
 import {
   TopArtistsResponse,
   TopTracksResponse,
-} from "../shared/interfaces/getTopItem";
+} from "../lib/interfaces/getTopItem";
 import GetTopItems from "../components/Button/GetTopItems";
 import TopTypeSelect from "../components/Select/TopTypeSelect";
-import CONST from "../shared/constants";
-import { TimeRange, timeRangeKeys, Type } from "../shared/interfaces/types";
+import CONST from "../lib/constants";
+import { TimeRange, timeRangeKeys, Type } from "../lib/interfaces/types";
 import TopItems from "../components/TopItems/TopItems";
 
 export default function Profile() {
   const [isLogin, setIsLogin] = useState(false);
-  const [topItems, setItems] = useState<
-    TopTracksResponse | TopArtistsResponse | null
-  >(null);
   const [topTracks, setTopTracks] = useState<TopTracksResponse | null>(null);
   const [topArtists, setTopArtists] = useState<TopArtistsResponse | null>(null);
-  const [mode, setMode] = useState<Type | "">("");
+  const [type, setType] = useState<Type | "">("");
   const [timeRange, setTimeRange] = useState<TimeRange | null>(null);
 
   function handleFetchArtists(data: TopArtistsResponse) {
@@ -32,13 +29,14 @@ export default function Profile() {
     setTopArtists(null);
   }
 
-  function handleMode(event: React.ChangeEvent<HTMLSelectElement>) {
+  function handleType(event: React.ChangeEvent<HTMLSelectElement>) {
     if (event.target.value === "artists" || event.target.value === "tracks") {
-      setMode(event.target.value);
-      setItems(null);
+      setType(event.target.value);
+      setTopTracks(null);
+      setTopArtists(null);
       setTimeRange(null);
     } else {
-      setMode("");
+      setType("");
     }
   }
 
@@ -61,12 +59,12 @@ export default function Profile() {
           <NavBar />
           <div className="relative top-16">
             <div className="flex flex-row gap-4 flex-wrap justify-center py-3">
-              <TopTypeSelect handleMode={handleMode} />
+              <TopTypeSelect handleType={handleType} />
               <div className="flex flex-row justify-center gap-2">
-                {timeRangeKeys.map((timeRange: TimeRange, index) => (
+                {timeRangeKeys.map((timeRange: TimeRange, index: number) => (
                   <GetTopItems
                     timeRange={timeRange}
-                    type={mode}
+                    type={type}
                     handleFetchArtists={handleFetchArtists}
                     handleFetchTracks={handleFetchTracks}
                     handleTimeRange={handleTimeRange}
@@ -79,7 +77,7 @@ export default function Profile() {
               topArtists={topArtists}
               topTracks={topTracks}
               timeRange={timeRange}
-              mode={mode}
+              type={type}
             />
           </div>
         </>
