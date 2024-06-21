@@ -1,9 +1,9 @@
 import {
   TopArtistsResponse,
   TopTracksResponse,
-} from "@/app/shared/interfaces/getTopItem";
-import { TimeRange, Type } from "@/app/shared/interfaces/types";
-import { timeRangeDisplayString } from "@/app/shared/utils/displayString";
+} from "@/app/lib/interfaces/getTopItem";
+import { TimeRange, Type } from "@/app/lib/interfaces/types";
+import { timeRangeDisplayString } from "@/app/lib/utils/displayString";
 import { useEffect } from "react";
 import TrackCollapse from "../Collapse/TrackCollapse";
 import ArtistCollapse from "../Collapse/ArtistCollapse";

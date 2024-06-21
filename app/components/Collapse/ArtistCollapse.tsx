@@ -1,4 +1,4 @@
-import { Artist } from "@/app/shared/interfaces/getTopItem";
+import { Artist } from "@/app/lib/interfaces/getTopItem";
 import Image from "next/image";
 
 export default function ArtistCollapse({

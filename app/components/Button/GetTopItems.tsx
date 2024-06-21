@@ -1,12 +1,12 @@
 "use client";
 
-import CONST from "@/app/shared/constants";
+import CONST from "@/app/lib/constants";
 import {
   TopArtistsResponse,
   TopTracksResponse,
-} from "@/app/shared/interfaces/getTopItem";
-import { TimeRange, Type } from "@/app/shared/interfaces/types";
-import { timeRangeDisplayString } from "@/app/shared/utils/displayString";
+} from "@/app/lib/interfaces/getTopItem";
+import { TimeRange, Type } from "@/app/lib/interfaces/types";
+import { timeRangeDisplayString } from "@/app/lib/utils/displayString";
 
 export default function GetTopItems({
   timeRange,
@@ -53,7 +53,6 @@ export default function GetTopItems({
         handleFetchTracks(data);
       }
     } catch (error) {
-      console.error("Failed to get top tracks", error);
       window.location.href = `${CONST.BASE_URL}`;
     }
   }

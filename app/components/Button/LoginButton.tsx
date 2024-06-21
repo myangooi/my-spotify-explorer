@@ -1,6 +1,6 @@
 "use client";
 
-import CONST from "@/app/shared/constants";
+import CONST from "@/app/lib/constants";
 import React from "react";
 
 export default function LoginButton() {

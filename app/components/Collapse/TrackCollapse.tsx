@@ -1,4 +1,4 @@
-import { Track } from "@/app/shared/interfaces/getTopItem";
+import { Track } from "@/app/lib/interfaces/getTopItem";
 import Image from "next/image";
 
 export default function TrackCollapse({
